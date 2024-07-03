@@ -1,15 +1,15 @@
 .App {
-  font-family: Arial, sans-serif;
   text-align: center;
-  margin: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "LouizeDisplay", serif;
 }
 
 input[type="file"] {
   margin: 20px;
-}
-
-button {
-  margin: 10px;
 }
 
 ul {
@@ -18,5 +18,9 @@ ul {
 }
 
 li {
-  margin: 5px 0;
+  margin: 10px 0;
+}
+
+button {
+  margin: 10px;
 }
