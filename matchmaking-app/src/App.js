@@ -5,6 +5,7 @@ import "./App.css";
 
 const App = () => {
   const [data, setData] = useState([]);
+  const [allPairs, setAllPairs] = useState([]);
   const [matches, setMatches] = useState([]);
   const [mostCompatible, setMostCompatible] = useState(true);
   const [processing, setProcessing] = useState(false);
@@ -27,7 +28,10 @@ const App = () => {
     console.log("Data before computing matches:", data); // Debugging log
     const computedMatches = computeMatches(data);
     console.log("Computed Matches:", computedMatches); // Debugging log
-    setMatches(computedMatches);
+    setAllPairs(computedMatches);
+    const pairedMatches = getPairedMatches(computedMatches, true);
+    console.log("Paired Matches:", pairedMatches); // Debugging log
+    setMatches(pairedMatches);
     setProcessing(false);
   };
 
@@ -58,9 +62,30 @@ const App = () => {
     return score;
   };
 
+  const getPairedMatches = (matches, isMostCompatible) => {
+    let pairedMatches = [];
+    let usedMales = new Set();
+    let usedFemales = new Set();
+
+    if (!isMostCompatible) {
+      matches = [...matches].reverse();
+    }
+
+    matches.forEach((match) => {
+      if (!usedMales.has(match.male) && !usedFemales.has(match.female)) {
+        pairedMatches.push(match);
+        usedMales.add(match.male);
+        usedFemales.add(match.female);
+      }
+    });
+
+    return pairedMatches;
+  };
+
   const toggleCompatibility = () => {
     setMostCompatible(!mostCompatible);
-    setMatches([...matches.reverse()]);
+    const pairedMatches = getPairedMatches(allPairs, !mostCompatible);
+    setMatches(pairedMatches);
   };
 
   return (
@@ -92,7 +117,6 @@ const App = () => {
           { label: "Female", key: "female" },
           { label: "Score", key: "score" },
         ]}
-        filename="matches-output.csv"
       >
         <button>Export CSV</button>
       </CSVLink>
