@@ -117,6 +117,7 @@ const App = () => {
           { label: "Female", key: "female" },
           { label: "Score", key: "score" },
         ]}
+        filename="matches.csv"
       >
         <button>Export CSV</button>
       </CSVLink>
