@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
 import { CSVLink } from "react-csv";
 import "./App.css";
@@ -8,6 +8,31 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionActions from '@mui/material/AccordionActions';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+
+const GifEmbed = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://tenor.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <div
+      className="tenor-gif-embed"
+      data-postid="9447582290077491631"
+      data-share-method="host"
+      data-aspect-ratio="1.22936"
+      data-width="100%"
+      dangerouslySetInnerHTML={{
+        __html: `<a href="https://tenor.com/view/peach-goma-gif-9447582290077491631">Peach Goma Sticker</a> from <a href="https://tenor.com/search/peach+goma-stickers">Peach Goma Stickers</a>`
+      }}
+    ></div>
+  );
+};
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -97,7 +122,9 @@ const App = () => {
   return (
     <div className="App">
       <h1>Matchmaking Bot</h1>
-      <div class="tenor-gif-embed" data-postid="9447582290077491631" data-share-method="host" data-aspect-ratio="1.22936" data-width="100%"><a href="https://tenor.com/view/peach-goma-gif-9447582290077491631">Peach Goma Sticker</a>from <a href="https://tenor.com/search/peach+goma-stickers">Peach Goma Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+      <div className="gif-size">
+        <GifEmbed/>
+      </div>
       <div className="accordion-container">
         <Accordion>
           <AccordionSummary

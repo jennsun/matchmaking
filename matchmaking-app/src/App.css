@@ -37,3 +37,9 @@ button {
 .button-container {
   padding: 10px;
 }
+
+.gif-size {
+  width: 20%;
+  height: 20%;
+  margin: auto;
+}
