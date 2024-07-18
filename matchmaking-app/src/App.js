@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Papa from "papaparse";
 import { CSVLink } from "react-csv";
 import "./App.css";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionActions from '@mui/material/AccordionActions';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Button from '@mui/material/Button';
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -91,36 +97,66 @@ const App = () => {
   return (
     <div className="App">
       <h1>Matchmaking Bot</h1>
-      <input type="file" accept=".csv" onChange={handleFileUpload} />
-      {fileUploaded && (
-        <button onClick={handleComputeMatches}>Compute Matches</button>
-      )}
-      <button onClick={toggleCompatibility}>
-        {mostCompatible ? "Most Compatible" : "Least Compatible"}
-      </button>
-      <h2>List of Matches</h2>
-      {processing ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {matches.map((match, index) => (
-            <li key={index}>
-              {match.male} & {match.female} - Score: {match.score}
-            </li>
-          ))}
-        </ul>
-      )}
-      <CSVLink
-        data={matches}
-        headers={[
-          { label: "Male", key: "male" },
-          { label: "Female", key: "female" },
-          { label: "Score", key: "score" },
-        ]}
-        filename="matches.csv"
-      >
-        <button>Export CSV</button>
-      </CSVLink>
+      <div className="accordion-container">
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="step1-content"
+            id="step1-header"
+          >
+            Step 1: Generate CSV with Match results
+          </AccordionSummary>
+          <AccordionDetails>
+            <p>
+              First, generate a csv with your match results! To do so, you need to create a matchmaking questionnaire and send it out to your participants and collect responses. I recommend Typeform or for a free alternative, try <a href="https://youform.com/"> YouForm</a>. Use questions where the more similar the score, the more compatible. Structure your csv where the first column is 'name', the second column is 'gender', and the following are the questions and answers. For an example, see <a href="https://docs.google.com/spreadsheets/d/1Qv-VwhdY_lPKJ1B2PqeLjrsFBY6_TsQw3pVnqv5OsMw/edit?usp=sharing">this</a>.
+            </p>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="step3-content"
+            id="step3-header"
+          >
+            Step 3: Upload CSV and Generate Matches!
+          </AccordionSummary>
+          <AccordionDetails>
+            <input type="file" accept=".csv" onChange={handleFileUpload} />
+            {fileUploaded && (
+              <button onClick={handleComputeMatches}>Compute Matches</button>
+            )}
+            <button onClick={toggleCompatibility}>
+              {mostCompatible ? "Most Compatible" : "Least Compatible"}
+            </button>
+            {processing ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <h2>Matches:</h2>
+                <ul>
+                  {matches.map((match, index) => (
+                    <li key={index}>
+                      {match.male} & {match.female} - Score: {match.score}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <CSVLink
+              data={matches}
+              headers={[
+                { label: "Male", key: "male" },
+                { label: "Female", key: "female" },
+                { label: "Score", key: "score" },
+              ]}
+              filename="matches.csv"
+            >
+              <button>Export CSV</button>
+            </CSVLink>
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
   );
 };
