@@ -34,3 +34,6 @@ button {
   text-align: center;
 }
 
+.button-container {
+  padding: 10px;
+}

@@ -97,6 +97,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Matchmaking Bot</h1>
+      <div class="tenor-gif-embed" data-postid="9447582290077491631" data-share-method="host" data-aspect-ratio="1.22936" data-width="100%"><a href="https://tenor.com/view/peach-goma-gif-9447582290077491631">Peach Goma Sticker</a>from <a href="https://tenor.com/search/peach+goma-stickers">Peach Goma Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
       <div className="accordion-container">
         <Accordion>
           <AccordionSummary
@@ -122,13 +123,23 @@ const App = () => {
             Step 2: Upload CSV and Generate Matches!
           </AccordionSummary>
           <AccordionDetails>
-            <input type="file" accept=".csv" onChange={handleFileUpload} />
-            {fileUploaded && (
-              <button onClick={handleComputeMatches}>Compute Matches</button>
-            )}
-            <button onClick={toggleCompatibility}>
-              {mostCompatible ? "Most Compatible" : "Least Compatible"}
-            </button>
+            <input
+              style={{ display: "none" }}
+              id="upload-file"
+              type="file"
+              accept=".csv"
+              onChange={handleFileUpload}
+            />
+            <label htmlFor="upload-file">
+              <div className="button-container">
+                <Button variant="outlined" component="span">
+                  Choose File
+                </Button>
+              </div>
+            </label>
+            <Button variant="outlined" onClick={toggleCompatibility}>
+              {mostCompatible ? "Toggle Most Compatible" : "Toggle Least Compatible"}
+            </Button>
             {processing ? (
               <p>Loading...</p>
             ) : (
@@ -152,7 +163,7 @@ const App = () => {
               ]}
               filename="matches.csv"
             >
-              <button>Export CSV</button>
+              <Button variant="contained">Export CSV</Button>
             </CSVLink>
           </AccordionDetails>
         </Accordion>
