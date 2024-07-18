@@ -104,11 +104,11 @@ const App = () => {
             aria-controls="step1-content"
             id="step1-header"
           >
-            Step 1: Generate CSV with Match results
+            Step 1: Create CSV from Responses
           </AccordionSummary>
           <AccordionDetails>
             <p>
-              First, generate a csv with your match results! To do so, you need to create a matchmaking questionnaire and send it out to your participants and collect responses. I recommend Typeform or for a free alternative, try <a href="https://youform.com/"> YouForm</a>. Use questions where the more similar the score, the more compatible. Structure your csv where the first column is 'name', the second column is 'gender', and the following are the questions and answers. For an example, see <a href="https://docs.google.com/spreadsheets/d/1Qv-VwhdY_lPKJ1B2PqeLjrsFBY6_TsQw3pVnqv5OsMw/edit?usp=sharing">this</a>.
+              First, generate a .csv file from your matchmaking questionnaires' responses! To do so, you need to create a matchmaking questionnaire and send it out to your participants and collect responses. I recommend Typeform or for a free alternative, try <a href="https://youform.com/" target="_blank" rel="noopener noreferrer">YouForm</a>. Use questions where the more similar the score, the more compatible. Structure your csv where the first column is 'name', the second column is 'gender', and the following are the questions and answers. For an example, see <a href="https://docs.google.com/spreadsheets/d/1Qv-VwhdY_lPKJ1B2PqeLjrsFBY6_TsQw3pVnqv5OsMw/edit?usp=sharing" target="_blank" rel="noopener noreferrer">this</a>.
             </p>
           </AccordionDetails>
         </Accordion>
@@ -119,7 +119,7 @@ const App = () => {
             aria-controls="step3-content"
             id="step3-header"
           >
-            Step 3: Upload CSV and Generate Matches!
+            Step 2: Upload CSV and Generate Matches!
           </AccordionSummary>
           <AccordionDetails>
             <input type="file" accept=".csv" onChange={handleFileUpload} />
