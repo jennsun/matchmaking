@@ -165,12 +165,15 @@ const App = () => {
               </div>
             </label>
             {/* <input type="file" accept=".csv" onChange={handleFileUpload} /> */}
-            <Button variant="outlined" onClick={toggleCompatibility}>
+            <div className="button-container">
+              {fileUploaded && (
+                <Button variant="outlined" onClick={handleComputeMatches}>Compute Matches</Button>
+              )}
+            </div>
+            <Button onClick={toggleCompatibility}>
               {mostCompatible ? "Toggle Most Compatible" : "Toggle Least Compatible"}
             </Button>
-            {fileUploaded && (
-              <Button variant="outlined" onClick={handleComputeMatches}>Compute Matches</Button>
-            )}
+            
             {processing ? (
               <p>Loading...</p>
             ) : (
